@@ -4,6 +4,7 @@
 */
 
 :root {
+	--content-width: 880px;
 	--bg: #fcfcfa;
 	--text: #212327;
 	--text-muted: #8e8e88;
@@ -47,7 +48,7 @@ body {
 }
 
 main {
-	width: 680px;
+	width: var(--content-width);
 	max-width: calc(100% - 2.75rem);
 	margin: 0 auto;
 	padding: 3rem 0 5.5rem;
