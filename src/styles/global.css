@@ -4,8 +4,7 @@
 */
 
 :root {
-	--content-width: 720px;
-	--edge-padding: clamp(1.25rem, 3.5vw, 3rem);
+	--content-width: 880px;
 	--bg: #fcfcfa;
 	--text: #212327;
 	--text-muted: #8e8e88;

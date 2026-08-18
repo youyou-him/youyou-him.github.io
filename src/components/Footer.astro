@@ -18,7 +18,10 @@ const today = new Date();
 		font-size: 0.85em;
 	}
 	.inner {
-		padding: 1.5rem var(--edge-padding) 2rem;
+		width: var(--content-width);
+		max-width: calc(100% - 2.75rem);
+		margin: 0 auto;
+		padding: 1.5rem 0 2rem;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
