@@ -1,0 +1,75 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+---
+
+<a class="card" href={`/blog/${post.id}/`}>
+	<div class="meta">
+		{post.data.tags?.map((tag) => <span class="chip">{tag}</span>)}
+		<FormattedDate date={post.data.pubDate} />
+	</div>
+	<span class="title">{post.data.title}</span>
+	<span class="summary">{post.data.description}</span>
+</a>
+<style>
+	.card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: 16px;
+		padding: 1.25rem 1.5rem;
+		box-shadow: var(--card-shadow);
+		color: var(--text);
+		transition:
+			border-color 0.15s ease,
+			transform 0.15s ease,
+			box-shadow 0.15s ease;
+	}
+	.card:hover {
+		text-decoration: none;
+		border-color: #d4ddea;
+		transform: translateY(-1px);
+		box-shadow: 0 4px 14px rgba(30, 37, 50, 0.07);
+	}
+	.card:hover .title {
+		color: var(--accent);
+	}
+	.meta {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+	.chip {
+		font-size: 0.72em;
+		font-weight: 700;
+		color: var(--accent);
+		background: var(--accent-soft);
+		border-radius: 999px;
+		padding: 0.12rem 0.6rem;
+	}
+	.meta time {
+		font-size: 0.78em;
+		color: var(--text-faint);
+		font-variant-numeric: tabular-nums;
+	}
+	.title {
+		font-size: 1.08em;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		line-height: 1.5;
+		transition: color 0.15s ease;
+	}
+	.summary {
+		font-size: 0.89em;
+		color: var(--text-muted);
+		line-height: 1.65;
+	}
+</style>

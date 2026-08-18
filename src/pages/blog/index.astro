@@ -2,8 +2,8 @@
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
+import PostCard from '../../components/PostCard.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
@@ -25,83 +25,50 @@ const years = [...postsByYear.keys()].sort((a, b) => b - a);
 		<BaseHead title={`글 | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
 			.page-title {
-				padding: 3rem 0 1.5rem;
+				padding: 1.6rem 0 1.8rem;
 			}
 			.page-title h1 {
+				margin: 0 0 0.2rem 0;
+				font-size: 1.5em;
+			}
+			.page-title p {
 				margin: 0;
+				color: var(--text-muted);
+				font-size: 0.9em;
 			}
 			.year-label {
-				font-size: 0.74em;
+				font-size: 0.8em;
 				font-weight: 700;
-				letter-spacing: 0.16em;
-				color: var(--accent);
-				margin: 2.4rem 0 0.4rem 0;
+				color: var(--text-faint);
+				margin: 2rem 0 0.7rem 0.2rem;
+				font-variant-numeric: tabular-nums;
 			}
 			section:first-of-type .year-label {
 				margin-top: 0;
 			}
-			ul {
-				list-style: none;
-				margin: 0;
-				padding: 0;
-			}
-			li {
-				margin: 0;
-			}
-			li a {
+			.cards {
 				display: flex;
-				justify-content: space-between;
-				align-items: baseline;
-				gap: 1.5rem;
-				padding: 1.15rem 0;
-				border-bottom: 1px solid var(--border);
-				color: var(--text);
-			}
-			li a:hover {
-				text-decoration: none;
-			}
-			li a:hover .post-title {
-				color: var(--accent);
-			}
-			.post-title {
-				font-family: var(--font-serif);
-				font-weight: 600;
-				font-size: 1.16em;
-				line-height: 1.5;
-				letter-spacing: -0.01em;
-			}
-			li time {
-				flex-shrink: 0;
-				font-size: 0.82em;
-				color: var(--text-muted);
-				font-variant-numeric: tabular-nums;
-			}
-			@media (max-width: 560px) {
-				li a {
-					flex-direction: column;
-					gap: 0.15rem;
-				}
+				flex-direction: column;
+				gap: 0.85rem;
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<div class="page-title"><h1>글</h1></div>
+			<div class="page-title">
+				<h1>글</h1>
+				<p>총 {posts.length}편</p>
+			</div>
 			{
 				years.map((year) => (
 					<section>
 						<p class="year-label">{year}</p>
-						<ul>
+						<div class="cards">
 							{postsByYear.get(year)!.map((post) => (
-								<li>
-									<a href={`/blog/${post.id}/`}>
-										<span class="post-title">{post.data.title}</span>
-										<FormattedDate date={post.data.pubDate} />
-									</a>
-								</li>
+								<PostCard post={post} />
 							))}
-						</ul>
+						</div>
 					</section>
 				))
 			}

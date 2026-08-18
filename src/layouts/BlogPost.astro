@@ -8,7 +8,7 @@ import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.props;
 ---
 
 <html lang="ko">
@@ -16,30 +16,47 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<BaseHead title={title} description={description} />
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
 		<style>
-			.title-block {
-				padding: 1.5rem 0 0;
-				margin-bottom: 2.8rem;
+			article {
+				background: var(--surface);
+				border: 1px solid var(--border);
+				border-radius: 20px;
+				box-shadow: var(--card-shadow);
+				padding: clamp(1.5rem, 5vw, 3rem);
 			}
-			.title-block h1 {
-				font-size: clamp(1.6rem, 4.5vw, 2.05rem);
-				line-height: 1.45;
-				margin: 0 0 0.6rem 0;
-				text-wrap: balance;
+			.meta {
+				display: flex;
+				align-items: center;
+				gap: 0.6rem;
+				margin-bottom: 0.7rem;
+			}
+			.chip {
+				font-size: 0.74em;
+				font-weight: 700;
+				color: var(--accent);
+				background: var(--accent-soft);
+				border-radius: 999px;
+				padding: 0.12rem 0.6rem;
 			}
 			.date {
-				font-size: 0.84em;
-				color: var(--text-muted);
+				font-size: 0.82em;
+				color: var(--text-faint);
 				font-variant-numeric: tabular-nums;
 			}
-			.last-updated-on {
-				font-style: normal;
+			.title-block {
+				margin-bottom: 2.2rem;
+			}
+			.title-block h1 {
+				font-size: clamp(1.45rem, 4vw, 1.85rem);
+				line-height: 1.42;
+				margin: 0;
+				text-wrap: balance;
 			}
 			.hero-image {
-				margin: 0 0 2.5rem 0;
+				margin: 0 0 2.2rem 0;
 			}
 			.hero-image img {
 				display: block;
-				border-radius: 8px;
+				border-radius: 12px;
 			}
 		</style>
 	</head>
@@ -49,17 +66,20 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<main>
 			<article>
 				<div class="title-block">
-					<h1>{title}</h1>
-					<div class="date">
-						<FormattedDate date={pubDate} />
-						{
-							updatedDate && (
-								<span class="last-updated-on">
-									(수정: <FormattedDate date={updatedDate} />)
-								</span>
-							)
-						}
+					<div class="meta">
+						{tags?.map((tag) => <span class="chip">{tag}</span>)}
+						<span class="date">
+							<FormattedDate date={pubDate} />
+							{
+								updatedDate && (
+									<span>
+										(수정: <FormattedDate date={updatedDate} />)
+									</span>
+								)
+							}
+						</span>
 					</div>
+					<h1>{title}</h1>
 				</div>
 				{
 					heroImage && (

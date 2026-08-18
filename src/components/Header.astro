@@ -14,24 +14,29 @@ import HeaderLink from './HeaderLink.astro';
 </header>
 <style>
 	header {
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		background: rgba(255, 255, 255, 0.85);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
 		border-bottom: 1px solid var(--border);
 	}
 	nav {
-		width: 680px;
+		width: 720px;
 		max-width: calc(100% - 2.5rem);
 		margin: 0 auto;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 1.1rem 0;
+		padding: 0.95rem 0;
 	}
 	.site-title {
-		font-family: var(--font-serif);
-		font-weight: 900;
-		font-size: 1.05em;
+		font-weight: 800;
+		font-size: 1em;
 		color: var(--text);
 		text-decoration: none;
-		letter-spacing: 0.01em;
+		letter-spacing: -0.03em;
 	}
 	.site-title:hover {
 		text-decoration: none;
@@ -39,15 +44,23 @@ import HeaderLink from './HeaderLink.astro';
 	}
 	.internal-links {
 		display: flex;
-		gap: 1.4rem;
+		gap: 0.3rem;
 	}
 	nav .internal-links a {
 		color: var(--text-muted);
 		text-decoration: none;
-		font-size: 0.94em;
+		font-size: 0.9em;
+		font-weight: 600;
+		padding: 0.3rem 0.75rem;
+		border-radius: 999px;
+		transition: 0.15s ease;
 	}
-	nav .internal-links a:hover,
-	nav .internal-links a.active {
+	nav .internal-links a:hover {
 		color: var(--text);
+		background: var(--code-bg);
+	}
+	nav .internal-links a.active {
+		color: var(--accent);
+		background: var(--accent-soft);
 	}
 </style>
