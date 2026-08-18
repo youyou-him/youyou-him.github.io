@@ -16,47 +16,47 @@ const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.prop
 		<BaseHead title={title} description={description} />
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
 		<style>
-			article {
-				background: var(--surface);
-				border: 1px solid var(--border);
-				border-radius: 20px;
-				box-shadow: var(--card-shadow);
-				padding: clamp(1.5rem, 5vw, 3rem);
+			.title-block {
+				padding: 1.6rem 0 0;
+				margin-bottom: 2.4rem;
+				border-bottom: 1px solid var(--border);
 			}
 			.meta {
 				display: flex;
-				align-items: center;
-				gap: 0.6rem;
-				margin-bottom: 0.7rem;
+				align-items: baseline;
+				gap: 0.8rem;
+				margin-bottom: 0.9rem;
 			}
-			.chip {
-				font-size: 0.74em;
+			.tag {
+				font-size: 0.72em;
 				font-weight: 700;
+				letter-spacing: 0.14em;
 				color: var(--accent);
-				background: var(--accent-soft);
-				border-radius: 999px;
-				padding: 0.12rem 0.6rem;
+				text-transform: uppercase;
 			}
 			.date {
-				font-size: 0.82em;
+				font-size: 0.8em;
 				color: var(--text-faint);
 				font-variant-numeric: tabular-nums;
 			}
-			.title-block {
-				margin-bottom: 2.2rem;
-			}
 			.title-block h1 {
-				font-size: clamp(1.45rem, 4vw, 1.85rem);
-				line-height: 1.42;
-				margin: 0;
+				font-size: clamp(1.6rem, 4.4vw, 2.1rem);
+				line-height: 1.45;
+				margin: 0 0 0.7rem 0;
 				text-wrap: balance;
 			}
+			.lede {
+				color: var(--text-muted);
+				font-size: 0.97em;
+				line-height: 1.75;
+				margin: 0 0 1.8rem 0;
+			}
 			.hero-image {
-				margin: 0 0 2.2rem 0;
+				margin: 0 0 2.4rem 0;
 			}
 			.hero-image img {
 				display: block;
-				border-radius: 12px;
+				border-radius: 6px;
 			}
 		</style>
 	</head>
@@ -67,7 +67,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.prop
 			<article>
 				<div class="title-block">
 					<div class="meta">
-						{tags?.map((tag) => <span class="chip">{tag}</span>)}
+						{tags?.map((tag) => <span class="tag">{tag}</span>)}
 						<span class="date">
 							<FormattedDate date={pubDate} />
 							{
@@ -80,6 +80,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.prop
 						</span>
 					</div>
 					<h1>{title}</h1>
+					{description && <p class="lede">{description}</p>}
 				</div>
 				{
 					heroImage && (
