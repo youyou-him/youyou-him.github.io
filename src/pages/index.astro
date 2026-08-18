@@ -19,14 +19,10 @@ const posts = (await getCollection('blog'))
 			.hero {
 				padding: 2.6rem 0 3rem;
 			}
-			.hero .overline {
-				display: block;
-				margin-bottom: 1rem;
-			}
 			.hero h1 {
-				font-size: clamp(1.65rem, 4.6vw, 2.3rem);
+				font-size: clamp(1.6rem, 4.2vw, 2.1rem);
 				line-height: 1.45;
-				margin: 0 0 0.8rem 0;
+				margin: 0 0 0.6rem 0;
 				text-wrap: balance;
 			}
 			.hero p {
@@ -61,9 +57,8 @@ const posts = (await getCollection('blog'))
 		<Header />
 		<main>
 			<section class="hero">
-				<span class="overline">Research Notes</span>
-				<h1>모델을 읽고, 수식을 풀고,<br />이해한 만큼 기록합니다.</h1>
-				<p>{SITE_DESCRIPTION} — 모델 아키텍처, 학습 기법, 논문 리뷰.</p>
+				<h1>머신러닝 공부 기록</h1>
+				<p>모델 아키텍처, 학습 기법, 논문 리뷰를 정리합니다.</p>
 			</section>
 			<section>
 				<div class="section-head">
