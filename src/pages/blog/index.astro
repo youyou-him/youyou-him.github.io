@@ -24,16 +24,20 @@ const years = [...postsByYear.keys()].sort((a, b) => b - a);
 	<head>
 		<BaseHead title={`글 | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
-			h1 {
-				margin-bottom: 2.5rem;
+			.page-title {
+				padding: 3rem 0 1.5rem;
 			}
-			.year {
-				font-size: 0.88em;
-				font-weight: 600;
-				color: var(--text-muted);
-				margin: 2.2rem 0 0.8rem 0;
+			.page-title h1 {
+				margin: 0;
 			}
-			.year:first-of-type {
+			.year-label {
+				font-size: 0.74em;
+				font-weight: 700;
+				letter-spacing: 0.16em;
+				color: var(--accent);
+				margin: 2.4rem 0 0.4rem 0;
+			}
+			section:first-of-type .year-label {
 				margin-top: 0;
 			}
 			ul {
@@ -42,40 +46,59 @@ const years = [...postsByYear.keys()].sort((a, b) => b - a);
 				padding: 0;
 			}
 			li {
-				display: flex;
-				align-items: baseline;
-				gap: 1.2rem;
-				padding: 0.55rem 0;
 				margin: 0;
 			}
-			li time {
-				flex-shrink: 0;
-				font-size: 0.88em;
-				color: var(--text-muted);
-				font-variant-numeric: tabular-nums;
-			}
 			li a {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				gap: 1.5rem;
+				padding: 1.15rem 0;
+				border-bottom: 1px solid var(--border);
 				color: var(--text);
 			}
 			li a:hover {
-				color: var(--accent);
 				text-decoration: none;
+			}
+			li a:hover .post-title {
+				color: var(--accent);
+			}
+			.post-title {
+				font-family: var(--font-serif);
+				font-weight: 600;
+				font-size: 1.16em;
+				line-height: 1.5;
+				letter-spacing: -0.01em;
+			}
+			li time {
+				flex-shrink: 0;
+				font-size: 0.82em;
+				color: var(--text-muted);
+				font-variant-numeric: tabular-nums;
+			}
+			@media (max-width: 560px) {
+				li a {
+					flex-direction: column;
+					gap: 0.15rem;
+				}
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>글</h1>
+			<div class="page-title"><h1>글</h1></div>
 			{
 				years.map((year) => (
 					<section>
-						<p class="year">{year}</p>
+						<p class="year-label">{year}</p>
 						<ul>
 							{postsByYear.get(year)!.map((post) => (
 								<li>
-									<FormattedDate date={post.data.pubDate} />
-									<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+									<a href={`/blog/${post.id}/`}>
+										<span class="post-title">{post.data.title}</span>
+										<FormattedDate date={post.data.pubDate} />
+									</a>
 								</li>
 							))}
 						</ul>

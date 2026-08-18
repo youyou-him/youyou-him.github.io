@@ -16,19 +16,26 @@ const posts = (await getCollection('blog'))
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
-			.intro {
-				margin-bottom: 3.5rem;
+			.hero {
+				padding: 3rem 0 2.8rem;
 			}
-			.intro p {
-				color: var(--text-muted);
-				margin: 0.4em 0 0 0;
+			.hero h1 {
+				font-size: clamp(1.6rem, 4.5vw, 2.2rem);
+				line-height: 1.45;
+				margin: 0 0 0.7rem 0;
+				text-wrap: balance;
 			}
-			.section-title {
-				font-size: 0.88em;
-				font-weight: 600;
+			.hero p {
 				color: var(--text-muted);
-				margin: 0 0 1rem 0;
-				text-transform: none;
+				font-size: 0.97em;
+				margin: 0;
+			}
+			.section-label {
+				font-size: 0.74em;
+				font-weight: 700;
+				letter-spacing: 0.16em;
+				color: var(--accent);
+				margin: 0 0 0.4rem 0;
 			}
 			ul {
 				list-style: none;
@@ -36,47 +43,71 @@ const posts = (await getCollection('blog'))
 				padding: 0;
 			}
 			li {
-				display: flex;
-				align-items: baseline;
-				gap: 1.2rem;
-				padding: 0.55rem 0;
 				margin: 0;
 			}
-			li time {
-				flex-shrink: 0;
-				font-size: 0.88em;
-				color: var(--text-muted);
-				font-variant-numeric: tabular-nums;
-			}
 			li a {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				gap: 1.5rem;
+				padding: 1.15rem 0;
+				border-bottom: 1px solid var(--border);
 				color: var(--text);
 			}
 			li a:hover {
-				color: var(--accent);
 				text-decoration: none;
+			}
+			li a:hover .post-title {
+				color: var(--accent);
+			}
+			.post-title {
+				font-family: var(--font-serif);
+				font-weight: 600;
+				font-size: 1.16em;
+				line-height: 1.5;
+				letter-spacing: -0.01em;
+			}
+			li time {
+				flex-shrink: 0;
+				font-size: 0.82em;
+				color: var(--text-muted);
+				font-variant-numeric: tabular-nums;
 			}
 			.all-posts {
 				display: inline-block;
-				margin-top: 1.5rem;
-				font-size: 0.94em;
+				margin-top: 1.8rem;
+				font-size: 0.92em;
+				color: var(--text-muted);
+			}
+			.all-posts:hover {
+				color: var(--accent);
+				text-decoration: none;
+			}
+			@media (max-width: 560px) {
+				li a {
+					flex-direction: column;
+					gap: 0.15rem;
+				}
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<section class="intro">
-				<h1>{SITE_TITLE}</h1>
-				<p>머신러닝 모델과 논문을 공부하고 정리하는 블로그입니다.</p>
+			<section class="hero">
+				<h1>모델을 읽고, 수식을 풀고,<br />이해한 만큼 기록합니다.</h1>
+				<p>{SITE_DESCRIPTION}</p>
 			</section>
 			<section>
-				<p class="section-title">최근 글</p>
+				<p class="section-label">최근 글</p>
 				<ul>
 					{
 						posts.map((post) => (
 							<li>
-								<FormattedDate date={post.data.pubDate} />
-								<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+								<a href={`/blog/${post.id}/`}>
+									<span class="post-title">{post.data.title}</span>
+									<FormattedDate date={post.data.pubDate} />
+								</a>
 							</li>
 						))
 					}

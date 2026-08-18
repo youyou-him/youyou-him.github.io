@@ -4,16 +4,17 @@
 */
 
 :root {
-	--bg: #ffffff;
-	--text: #1c1e21;
-	--text-muted: #7a7f87;
-	--border: #e8eaed;
-	--accent: #2456c9;
-	--code-bg: #f4f5f7;
+	--bg: #fdfdfc;
+	--text: #23242a;
+	--text-muted: #8b8b84;
+	--border: #e9e8e3;
+	--accent: #1d3f9e;
+	--code-bg: #f3f3ef;
 	--font-sans:
 		'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
 		'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic',
 		sans-serif;
+	--font-serif: 'Noto Serif KR', 'Apple Myungjo', 'Nanum Myeongjo', Georgia, serif;
 	--font-mono:
 		ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
 }
@@ -50,12 +51,13 @@ h5,
 h6 {
 	margin: 2.2em 0 0.6em 0;
 	color: var(--text);
-	line-height: 1.4;
+	font-family: var(--font-serif);
+	line-height: 1.5;
 	font-weight: 700;
-	letter-spacing: -0.01em;
+	letter-spacing: -0.015em;
 }
 h1 {
-	font-size: 1.7em;
+	font-size: 1.75em;
 	margin-top: 0;
 }
 h2 {
